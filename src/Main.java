@@ -7,7 +7,7 @@ public class Main {
             File arquivo = new File("texto.txt");
             Scanner leitor = new Scanner(arquivo);
 
-            System.out.println("--- Iniciando Leitura do Documento ---");
+            System.out.println("Iniciando Leitura do Documento");
 
             while (leitor.hasNextLine()) {
                 String linha = leitor.nextLine();
@@ -17,7 +17,7 @@ public class Main {
             }
 
             leitor.close();
-            System.out.println("--- Leitura Finalizada com Sucesso ---");
+            System.out.println("Leitura Finalizada com Sucesso");
 
         } catch (Exception e) {
             System.err.println("Erro: Certifique-se de que 'texto.txt' está na pasta do projeto.");
