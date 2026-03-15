@@ -28,7 +28,7 @@ public class Main {
                     arvoreDaLinha.inserir(listaTemporaria.get(i));
                 }
 
-                // Guarda a árvore da linha na pilha
+                // COMANDO QUE INICIA O EMPILHAMENTO DA ÁRVORE
                 pilhaDeArvores.push(arvoreDaLinha);
             }
             leitor.close();
@@ -39,7 +39,7 @@ public class Main {
             while (!pilhaDeArvores.isEmpty()) {
                 ArvoreAVL arvore = pilhaDeArvores.pop();
 
-                // Aqui você deve chamar o seu método de travessia/hash
+                // Aqui você deve chamar o seu mEtodo de travessia/hash
                 // Exemplo: String hash = arvore.gerarHash();
                 // System.out.println(hash);
 

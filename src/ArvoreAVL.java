@@ -35,3 +35,16 @@ public class ArvoreAVL {
         return nodo;
     }
 }
+public String gerarCodigoHash() {
+    StringBuilder sb = new StringBuilder();
+    gerarHashRecursivo(raiz, sb);
+    return sb.toString();
+}
+
+private void gerarHashRecursivo(Nodo nodo, StringBuilder sb) {
+    if (nodo != null) {
+        gerarHashRecursivo(nodo.esquerdo, sb); // Visita esquerda
+        sb.append(nodo.palavra);              // Pega a palavra
+        gerarHashRecursivo(nodo.direito, sb);  // Visita direita
+    }
+}
