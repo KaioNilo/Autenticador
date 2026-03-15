@@ -14,7 +14,6 @@ public class Main {
 
             while (leitor.hasNextLine()) {
                 String linha = leitor.nextLine();
-
                 // Quebrar a linha em palavras
                 String[] palavrasDaLinha = linha.split(" ");
 
@@ -26,8 +25,13 @@ public class Main {
                 }
             }
             leitor.close();
-
-            // Exibe o resultado final
+// Questão 2.3 - Inserção da arvore
+            ArvoreAVL arvore = new ArvoreAVL();
+            for (int i = listaDePalavras.size() - 1; i >= 0; i--) {
+                String palavra = listaDePalavras.get(i);
+                arvore.inserir(palavra); // Insere na árvore (ela já trata duplicatas)
+            }
+   //fim da inserção da árvore
             System.out.println("Total de palavras capturadas: " + listaDePalavras.size());
             System.out.println("Lista completa: " + listaDePalavras);
 
