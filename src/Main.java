@@ -42,8 +42,13 @@ public class Main {
 
             // Desempilhar e gerar Hash
             while (!pilhaDeArvores.isEmpty()) {
+                // Desempilha a árvore
                 ArvoreAVL arvore = pilhaDeArvores.pop();
+
+                // Gera o hash para a árvore desempilhada
                 String hashFinal = arvore.obterHashFinal();
+
+                // Quebra de linha
                 System.out.println(hashFinal);
             }
 
