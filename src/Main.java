@@ -3,51 +3,52 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Pilha que armazenará uma Árvore AVL para cada linha do arquivo
         Stack<ArvoreAVL> pilhaDeArvores = new Stack<>();
+        int contadorLinhas = 0;
 
         try {
             File arquivo = new File("texto.txt");
             Scanner leitor = new Scanner(arquivo);
 
+            System.out.println("=== INICIANDO PROCESSAMENTO DO ARQUIVO ===");
+
             while (leitor.hasNextLine()) {
+                contadorLinhas++;
                 String linha = leitor.nextLine();
-                String[] palavrasDaLinha = linha.split(" ");
+                if (linha.isBlank()) continue;
 
-                // Lista temporária para inverter a ordem das palavras da linha
-                List<String> listaTemporaria = new ArrayList<>();
-                for (String p : palavrasDaLinha) {
-                    if (!p.isBlank()) listaTemporaria.add(p);
+                System.out.println("\nLinha " + contadorLinhas + ": Lendo e invertendo palavras...");
+
+                // Inserir em lista dinâmica
+                String[] palavras = linha.split(" ");
+                List<String> lista = new ArrayList<>(Arrays.asList(palavras));
+
+                // Criar árvore e inserir no sentido REVERSO
+                ArvoreAVL arvore = new ArvoreAVL();
+                for (int i = lista.size() - 1; i >= 0; i--) {
+                    String p = lista.get(i).replaceAll("[^a-zA-Zá-úÁ-Ú]", ""); // Limpa pontuação
+                    if (!p.isBlank()) {
+                        arvore.inserir(p);
+                    }
                 }
 
-                // Cria uma árvore AVL nova para ESTA linha
-                ArvoreAVL arvoreDaLinha = new ArvoreAVL();
-
-                // Insere na árvore no sentido reverso
-                for (int i = listaTemporaria.size() - 1; i >= 0; i--) {
-                    arvoreDaLinha.inserir(listaTemporaria.get(i));
-                }
-
-                // COMANDO QUE INICIA O EMPILHAMENTO DA ÁRVORE
-                pilhaDeArvores.push(arvoreDaLinha);
+                // Empilhar a árvore
+                pilhaDeArvores.push(arvore);
+                System.out.println("   -> Árvore balanceada e empilhada com sucesso.");
             }
             leitor.close();
 
-            System.out.println("Processamento concluído. Gerando códigos (hashes):\n");
+            System.out.println("\n=== GERANDO CÓDIGOS DE AUTENTICAÇÃO (DESEMPILHANDO) ===\n");
 
-            // Desempilha cada árvore e processa
+            // Desempilhar e gerar Hash
             while (!pilhaDeArvores.isEmpty()) {
                 ArvoreAVL arvore = pilhaDeArvores.pop();
-
-                // Aqui você deve chamar o seu mEtodo de travessia/hash
-                // Exemplo: String hash = arvore.gerarHash();
-                // System.out.println(hash);
-
-                System.out.println("Árvore desempilhada e processada.");
+                String hashFinal = arvore.obterHashFinal();
+                System.out.println(hashFinal);
             }
 
         } catch (Exception e) {
-            System.err.println("Erro: " + e.getMessage());
+            System.err.println("Erro crítico: " + e.getMessage());
         }
     }
 }
